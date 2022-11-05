@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather-Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="dashboard text-centered"><h1>Weather Dashboard</h1></header>
+
+    <main>
+      <div class="row">
+        <!-- SECTION FOR SEARCH -->
+        <section class="search-section col-3 ">
+          <div id="search-div" class="p-1">
+            <h2 id="h2" class="">Search for a City:</h2>
+            <input id="searchInput" class="input" type="search" placeholder="Enter City" />
+            <button class="search-btn btn-primary"  id="button" type="submit">
+              Search
+            </button>
+          </div>
+          <!-- hidtory box -->
+          <div class="history-storage" id="history-box"></div>
+        </section>
+
+        <!-- Section where current weather and 5 days forecast  -->
+        <section class="weather-now col-9">
+          <!-- Box with current weather -->
+          <div class="current-weather weather-section">
+            <div class="d-flex cityName">
+              <h2 id="city"></h2>
+              <h3 id="date"></h3>
+              <img id="weather-icon" />
+            </div>
+            <p class="pt-1 pl-2">Temp: <span id="temperature"></span> &deg;F</p>
+            <p class="pl-2">Wind: <span id="wind"></span> MPH</p>
+            <p class="pl-2">Humidity: <span id="humidity"></span>%</p>
+          </div>
+
+          <!-- 5 DAYS FORECAST -->
+          <h3>5-Day Forecast:</h3>
+          <div class="fiveday-weather">
+            <!-- 5 BOXES FOR 5 DAYS OF FORECAST -->
+            <!-- DAY-1 -->
+            <div class="day-1">
+              <h4 class="date-box text-light" id="dateBox"></h4>
+              <img class="5-day" id=weather-img/>
+              <p class="pt-1 pl-2 text-light">Temp: <span id="tempFiveDays"></span> &deg;F</p>
+              <p class="pl-2 text-light">Wind: <span id="windFiveDays"></span> MPH</p>
+              <p class="pl-2 text-light">Humidity: <span id="humidFiveDays"></span>%</p>
+            </div>
+            <!-- DAY-2 -->
+            <!-- <div class="day-2">
+              <h3 class="date-box"></h3>
+              <img class="5-day" />
+              <p class="pt-1 pl-2">
+                Temp: <span id="temperature"></span> &deg;F
+              </p>
+              <p class="pl-2">Wind: <span id="wind"></span> MPH</p>
+              <p class="pl-2">Humidity: <span id="humidity"></span>%</p>
+            </div> -->
+            <!-- DAY-3 -->
+            <!-- <div class="day-3">
+              <h3 class="date-box"></h3>
+              <img class="5-day" />
+              <p class="pt-1 pl-2">
+                Temp: <span id="temperature"></span> &deg;F
+              </p>
+              <p class="pl-2">Wind: <span id="wind"></span> MPH</p>
+              <p class="pl-2">Humidity: <span id="humidity"></span>%</p>
+            </div> -->
+            <!-- DAY-4 -->
+            <!-- <div class="day-4">
+              <h3 class="date-box"></h3>
+              <img class="5-day" />
+              <p class="pt-1 pl-2">
+                Temp: <span id="temperature"></span> &deg;F
+              </p>
+              <p class="pl-2">Wind: <span id="wind"></span> MPH</p>
+              <p class="pl-2">Humidity: <span id="humidity"></span>%</p>
+            </div> -->
+            <!-- DAY-5 -->
+            <!-- <div class="day-5">
+              <h3 class="date-box"></h3>
+              <img id="5-day" />
+              <p class="pt-1 pl-2">
+                Temp: <span id="temperature"></span> &deg;F
+              </p>
+              <p class="pl-2">Wind: <span id="wind"></span> MPH</p>
+              <p class="pl-2">Humidity: <span id="humidity"></span>%</p>
+            </div> -->
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <!-- Moment -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

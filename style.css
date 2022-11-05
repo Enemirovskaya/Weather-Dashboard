@@ -1,0 +1,32 @@
+.dashboard{
+    text-align: center;
+    color: white;
+    background-color: rgba(14, 14, 125, 0.937);
+    
+}
+.weather-section{
+    border: 2px solid lightgray;
+    
+}
+.input{
+   margin-bottom: 16px;
+   width: 100%;
+
+}
+.search-btn{
+    /* margin: auto; */
+    margin-top:10px;
+    width: 100%;
+    
+}
+.fiveday-weather{
+    display:flex;
+    gap: 16px;
+}
+.day-1{
+    background-color: rgb(21, 21, 89);
+
+}
+.day-1 {
+
+}
