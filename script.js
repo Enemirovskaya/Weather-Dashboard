@@ -47,7 +47,7 @@ function getApi(cityName) {
       var lon = data[0].lon;
       var name = data[0].name;
       getWeather(lat, lon, name);
-      fiveDayForcast();
+      fiveDayForcast(lat, lon);
     });
 }
 
@@ -83,16 +83,16 @@ function displayWeather(data, name) {
   );
   // finish adding up information for current weather
 }
-
-function fiveDayForcast() {
+// weather for 5 days box
+function fiveDayForcast(lat, lon) {
   var callApi3 = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${keyApi}&units=imperial`;
   fetch(callApi3)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data.main);
-      fiveDayForcast(data.main);
+      console.log(data);
+      // fiveDayForcast(data);
     });
 
 
@@ -110,12 +110,15 @@ function fiveDayForcast() {
     p1.setAttribute("class", "pt-1 pl-2 text-light");
     p2.setAttribute("class", "pt-1 pl-2 text-light");
     p3.setAttribute("class", "pt-1 pl-2 text-light");
-    imgEl.setAttribute("class", "pt-1 pl-2 ");
-
-    h4.textContent = "Date";
+   
+    h4.textContent = "Date:";
     p1.textContent = "Temp:";
     p2.textContent = "Wind:";
     p3.textContent = "Humidity:";
+    imgEl.setAttribute("src",
+    "http://openweathermap.org/img/wn/" + data.city.list[0].weather[0].icon + ".png");
+    // imgEl.setAttribute("src",
+    // "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
 
     fivedayContainer.appendChild(card);
     card.appendChild(h4);
@@ -124,6 +127,7 @@ function fiveDayForcast() {
     card.appendChild(p3);
     card.appendChild(imgEl);
   }
+
 }
 
 
