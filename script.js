@@ -57,7 +57,6 @@ function getWeather(lat, lon, name) {
   var callApi2 = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${keyApi}&units=imperial`;
   fetch(callApi2)
     .then(function (response) {
-      // FOR LOOP GOES HERE--------------
       return response.json();
     })
     .then(function (data) {
@@ -66,7 +65,6 @@ function getWeather(lat, lon, name) {
 }
 
 function displayWeather(data, name) {
-  // DATE GOES INFRONT OF CITY
   if (!data) {
     return;
   }
@@ -87,6 +85,16 @@ function displayWeather(data, name) {
 }
 
 function fiveDayForcast() {
+  var callApi3 = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${keyApi}&units=imperial`;
+  fetch(callApi3)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data.main);
+      fiveDayForcast(data.main);
+    });
+
 
   fivedayContainer.innerHTML = ''
   for (var i = 0; i < 5; i++) {
@@ -118,7 +126,7 @@ function fiveDayForcast() {
   }
 }
 
-// getApi("Montreal");
+
 function InitiateSearch() {
   console.log("InitiateSearch FIRED!");
   let cityName = searchInput.value;
