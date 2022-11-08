@@ -1,6 +1,6 @@
 // const dashboard = document.getElementById(dashboard);
 // CURRENT INFO
-
+console.log("If this is logged, script.js is linked correctly.");
 var currentDateEl = document.getElementById("date");
 var currentImgEl = document.getElementById("weather-icon");
 var currentTempEl = document.getElementById("temperature");
@@ -26,7 +26,7 @@ var fivedayContainer = document.getElementById("fiveday-weather");
 // API KEY
 var keyApi = "851d8dc7ff88812ec5f09a19967a38aa";
 
-// DATE FOR DAY-1
+// CURRENT WEATHER
 // var dayOne = moment().add('L', 1);
 // $('#dateBox').text(todayDate);
 
@@ -50,7 +50,7 @@ function getApi(cityName) {
       fiveDayForcast(lat, lon);
     });
 }
-
+// CURRENT WEATHER API WITH  DATE, AND WEATHER INFO
 function getWeather(lat, lon, name) {
   // scoped
   // api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
@@ -84,6 +84,7 @@ function displayWeather(data, name) {
   // finish adding up information for current weather
 }
 // weather for 5 days box
+// 5 DAY WEATHER FORECAST
 function fiveDayForcast(lat, lon) {
   var callApi3 = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${keyApi}&units=imperial`;
   fetch(callApi3)
@@ -92,44 +93,44 @@ function fiveDayForcast(lat, lon) {
     })
     .then(function (data) {
       console.log(data);
-      // fiveDayForcast(data);
+      
+
+      fivedayContainer.innerHTML = "";
+      for (var i = 0; i < 5; i++) {
+        console.log(`Iteration ${i * 8}`);
+        var card = document.createElement("div");
+        var h4 = document.createElement("h4");
+        var p1 = document.createElement("p");
+        var p2 = document.createElement("p");
+        var p3 = document.createElement("p");
+        var imgEl = document.createElement("img");
+
+        card.setAttribute("class", "day-1");
+        h4.setAttribute("class", "date-box text-light");
+        p1.setAttribute("class", "pt-1 pl-2 text-light");
+        p2.setAttribute("class", "pt-1 pl-2 text-light");
+        p3.setAttribute("class", "pt-1 pl-2 text-light");
+
+        h4.textContent = data.list[i * 8].dt_txt;
+        p1.textContent = "Temp: " + data.list[i * 8].main.temp + "°F";
+        p2.textContent = `Wind: ${data.list[i * 8].wind.speed} mph`;
+        p3.textContent = "Humidity: " + data.list[i * 8].main.humidity;
+        imgEl.setAttribute(
+          "src",
+          "http://openweathermap.org/img/wn/" +
+            data.list[i * 8].weather[0].icon +
+            ".png"
+        );
+        
+        fivedayContainer.appendChild(card);
+        card.appendChild(h4);
+        card.appendChild(p1);
+        card.appendChild(p2);
+        card.appendChild(p3);
+        card.appendChild(imgEl);
+      }
     });
-
-
-  fivedayContainer.innerHTML = ''
-  for (var i = 0; i < 5; i++) {
-    var card = document.createElement("div");
-    var h4 = document.createElement("h4");
-    var p1 = document.createElement("p");
-    var p2 = document.createElement("p");
-    var p3 = document.createElement("p");
-    var imgEl = document.createElement("img");
-
-    card.setAttribute("class", "day-1");
-    h4.setAttribute("class", "date-box text-light");
-    p1.setAttribute("class", "pt-1 pl-2 text-light");
-    p2.setAttribute("class", "pt-1 pl-2 text-light");
-    p3.setAttribute("class", "pt-1 pl-2 text-light");
-   
-    h4.textContent = "Date:";
-    p1.textContent = "Temp:";
-    p2.textContent = "Wind:";
-    p3.textContent = "Humidity:";
-    imgEl.setAttribute("src",
-    "http://openweathermap.org/img/wn/" + data.city.list[0].weather[0].icon + ".png");
-    // imgEl.setAttribute("src",
-    // "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
-
-    fivedayContainer.appendChild(card);
-    card.appendChild(h4);
-    card.appendChild(p1);
-    card.appendChild(p2);
-    card.appendChild(p3);
-    card.appendChild(imgEl);
-  }
-
 }
-
 
 function InitiateSearch() {
   console.log("InitiateSearch FIRED!");
@@ -141,16 +142,10 @@ function InitiateSearch() {
 
 searchBtn.addEventListener("click", InitiateSearch);
 
-// 5 DAY WEATHER FORECAST
+
 // API call
 
-// Coordinates by location name
-// API call
-// http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-// $('#search-btn').on('click', function (event) {
-// Preventing the button from trying to submit the form
-// event.preventDefault();
-// API KEY 851d8dc7ff88812ec5f09a19967a38aa
-// for (i=0; i<5; i++){
-//     document.getElementById("tempFiveDays"+(i+1).textContent = data.list[0].main.temp)
-// }
+
+
+// date-stamp for 5 days forcast
+// const date= new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
