@@ -1,12 +1,14 @@
 // const dashboard = document.getElementById(dashboard);
+
+document.addEventListener ('DOMContentLoaded', function() {
 // CURRENT INFO
-console.log("If this is logged, script.js is linked correctly.");
 var currentDateEl = document.getElementById("date");
 var currentImgEl = document.getElementById("weather-icon");
 var currentTempEl = document.getElementById("temperature");
 var currentWindEl = document.getElementById("wind");
 var currentHumEl = document.getElementById("humidity");
 // SEARCH SECTION
+var searchHistory=[];
 var searchBtn = document.getElementById("button");
 var searchInput = document.getElementById("searchInput");
 var searchDiv = document.getElementById("search-div");
@@ -48,6 +50,7 @@ function getApi(cityName) {
       var name = data[0].name;
       getWeather(lat, lon, name);
       fiveDayForcast(lat, lon);
+      appendHistory(cityName);
     });
 }
 // CURRENT WEATHER API WITH  DATE, AND WEATHER INFO
@@ -105,12 +108,14 @@ function fiveDayForcast(lat, lon) {
         var p3 = document.createElement("p");
         var imgEl = document.createElement("img");
 
+
         card.setAttribute("class", "day-1");
         h4.setAttribute("class", "date-box text-light");
         p1.setAttribute("class", "pt-1 pl-2 text-light");
         p2.setAttribute("class", "pt-1 pl-2 text-light");
         p3.setAttribute("class", "pt-1 pl-2 text-light");
 
+        // const date= new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
         h4.textContent = data.list[i * 8].dt_txt;
         p1.textContent = "Temp: " + data.list[i * 8].main.temp + "°F";
         p2.textContent = `Wind: ${data.list[i * 8].wind.speed} mph`;
@@ -139,13 +144,74 @@ function InitiateSearch() {
 
   getApi(cityName);
 }
+function InitiateHistoryClick(e){
+  if(!e.target.matches('.history-buttons')){
+    return
+  }
+var btn =e.target
+var search = btn.getAttribute('data-search')
+getApi(search);
+}
+
+function pastSearch(){
+  history.innerHTML='';
+
+  for(var i= searchHistory.length-1; i>=0; i-- ){
+    var historyEl = document.createElement("button");
+    historyEl.setAttribute("class", "history-buttons");
+    historyEl.setAttribute("data-search", searchHistory[i])
+    historyEl.textContent = searchHistory[i];
+    history.append(historyEl);
+  }
+
+   // grabbing the value of the input field
+  //  var textValue = input.value;
+  //  console.log(textValue);
+
+   // LOCAL STORAGE       "KEY" ,  "VALUE"
+  //  
+     
+  // historyEl.textContent.cityName
+}
+function appendHistory(search){
+  if(searchHistory.indexOf(search)!==-1){
+    return;
+  }
+searchHistory.push(search)
+localStorage.setItem("search", JSON.stringify(searchHistory));
+pastSearch();
+checkHistoryLength();
+}
+function getHistory(){
+  var searchedCity = localStorage.getItem("search");
+  if(searchedCity){
+    searchHistory = JSON.parse(searchedCity)
+  }
+  pastSearch();
+  checkHistoryLength();
+}
+getHistory();
+
+function checkHistoryLength(){
+  if(searchHistory.length>10){
+    searchHistory = searchHistory.slice(1);
+  }
+
+ }
+// function invokePastSearch(event){
+//   const liEl=event.target;
+//   if (event.target.matches("li")){
+//       city=liEl.textContent.trim();
+//       currentWeather(city);
+//   }
 
 searchBtn.addEventListener("click", InitiateSearch);
+history.addEventListener('click', InitiateHistoryClick);
+});
 
-
-// API call
 
 
 
 // date-stamp for 5 days forcast
-// const date= new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
+
+// 
